@@ -1,0 +1,110 @@
+{
+  "status": "ok",
+  "region": "us-west",
+  "roles": [
+    "socket"
+  ],
+  "results": {
+    "services": {
+      "redis": true,
+      "database": true
+    },
+    "stats": {
+      "servers_count": 4,
+      "online": 10787,
+      "session": 7,
+      "server": {
+        "cpus": 2,
+        "active_connections": 3940,
+        "wait_time": 1163,
+        "workers": [
+          [
+            "requests:pageviews",
+            {
+              "wait_time": 0,
+              "workers": 0,
+              "waiting": 0,
+              "idle": 0,
+              "time_to_return": 0,
+              "recently_blocked_keys": [],
+              "top_keys": []
+            }
+          ],
+          [
+            "io",
+            {
+              "wait_time": 1163,
+              "workers": 2188,
+              "waiting": 8,
+              "idle": 218,
+              "time_to_return": 394523,
+              "recently_blocked_keys": [
+                [
+                  "3FG7RD4yF6",
+                  202,
+                  "2025-08-08T15:46:50.470Z"
+                ],
+                [
+                  "eakJiadzmi",
+                  5,
+                  "2025-08-08T15:46:50.522Z"
+                ]
+              ],
+              "top_keys": [
+                [
+                  "eakJiadzmi",
+                  0.11578400830737279
+                ],
+                [
+                  "3FG7RD4yF6",
+                  0.16095534787123572
+                ],
+                [
+                  "rSXw1Dkv6k",
+                  0.05970924195223261
+                ],
+                [
+                  "ZydVfsAYS4",
+                  0.047248182762201454
+                ],
+                [
+                  "LJJk9ezA8p",
+                  0.05659397715472482
+                ]
+              ]
+            }
+          ],
+          [
+            "requests:unsupported-users",
+            {
+              "wait_time": 0,
+              "workers": 0,
+              "waiting": 0,
+              "idle": 0,
+              "time_to_return": 0,
+              "recently_blocked_keys": [],
+              "top_keys": []
+            }
+          ],
+          [
+            "recording-workers",
+            {
+              "wait_time": 0,
+              "workers": 10,
+              "waiting": 0,
+              "idle": 10,
+              "time_to_return": 0,
+              "recently_blocked_keys": [],
+              "top_keys": []
+            }
+          ]
+        ],
+        "cpu_load": 0.74,
+        "timers": 102
+      }
+    }
+  },
+  "strict": false,
+  "server_issue": null,
+  "version": "2025.7.8"
+}
