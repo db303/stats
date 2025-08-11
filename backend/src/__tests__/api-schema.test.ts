@@ -4,7 +4,7 @@ import {
   WorkerQueueSchema,
   ServiceStatusSchema,
   WorkerQueueNameSchema,
-} from "../types/api";
+} from "../../../shared/types";
 
 describe("API Schema Validation", () => {
   describe("ApiResponseSchema", () => {

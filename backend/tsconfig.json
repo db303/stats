@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "src",
+    "baseUrl": ".",
+    "paths": {
+      "@shared/*": ["../shared/*"]
+    },
     "target": "ES2022",
     "module": "CommonJS",
     "moduleResolution": "node",
@@ -14,6 +17,6 @@
     "skipLibCheck": true,
     "sourceMap": true
   },
-  "include": ["src"],
+  "include": ["src", "../shared"],
   "exclude": ["node_modules", "dist"]
 }

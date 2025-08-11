@@ -1,7 +1,7 @@
 import { Server, Socket } from "socket.io";
 import { apiClient } from "./apiClient";
 import { Region, REGIONS } from "../config/endpoints";
-import { ApiResponse } from "../types/api";
+import { ApiResponse } from "../../../shared/types";
 import { ApiError } from "../types/errors";
 
 const regionDataCache = new Map<

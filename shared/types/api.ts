@@ -1,3 +1,4 @@
+// Note: This file imports from 'zod' which must be available in the consuming project
 import { z } from "zod";
 
 export const WorkerQueueSchema = z.object({
