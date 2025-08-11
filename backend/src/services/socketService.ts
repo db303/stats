@@ -8,21 +8,10 @@ const regionDataCache = new Map<
   Region,
   { data: ApiResponse; timestamp: number }
 >();
-const regionStatus = new Map<Region, "healthy" | "error" | "unknown">();
 let fetchInterval: NodeJS.Timeout | null = null;
-
-export const initializeRegions = () => {
-  Object.keys(REGIONS).forEach((region) => {
-    regionStatus.set(region as Region, "unknown");
-  });
-};
 
 export const handleConnection = () => (socket: Socket) => {
   console.log(`Client ${socket.id} connected`);
-
-  socket.emit("status", {
-    regions: Object.fromEntries(regionStatus),
-  });
 
   socket.on("subscribe-region", (region: Region) => {
     handleRegionSubscription(socket, region);
@@ -63,7 +52,7 @@ const handleRegionUnsubscription = (socket: Socket, region: Region) => {
 
 export const startPeriodicFetching = (
   io: Server,
-  intervalMs: number = 30000
+  intervalMs: number = parseInt(process.env.FETCH_INTERVAL_MS || "30000")
 ) => {
   fetchInterval = setInterval(() => {
     fetchAllRegionsData(io);
@@ -90,7 +79,6 @@ const fetchAllRegionsData = async (io: Server) => {
       const timestamp = Date.now();
 
       regionDataCache.set(region, { data, timestamp });
-      regionStatus.set(region, "healthy");
 
       io.to(region).emit("data", {
         region,
@@ -98,7 +86,6 @@ const fetchAllRegionsData = async (io: Server) => {
         timestamp: new Date(timestamp).toISOString(),
       });
     } catch (error) {
-      regionStatus.set(region, "error");
       const errorMessage =
         error instanceof ApiError ? error.message : "Unknown error";
 
@@ -111,8 +98,4 @@ const fetchAllRegionsData = async (io: Server) => {
       });
     }
   }
-
-  io.emit("status", {
-    regions: Object.fromEntries(regionStatus),
-  });
 };

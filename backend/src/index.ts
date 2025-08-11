@@ -1,21 +1,20 @@
 import { Server } from "socket.io";
 import { createServer } from "http";
+import "dotenv/config";
 import {
-  initializeRegions,
   handleConnection,
   startPeriodicFetching,
 } from "./services/socketService";
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const httpServer = createServer();
 const io = new Server(httpServer, {
   cors: {
-    origin: "*",
+    origin: process.env.CORS_ORIGIN || "*",
     methods: ["GET", "POST"],
   },
 });
 
-initializeRegions();
 io.on("connection", handleConnection());
 startPeriodicFetching(io);
 
