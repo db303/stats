@@ -1,19 +1,24 @@
-import { WebSocketServer } from "ws";
+import { Server } from "socket.io";
+import { createServer } from "http";
+import {
+  initializeRegions,
+  handleConnection,
+  startPeriodicFetching,
+} from "./services/socketService";
 
 const PORT = 3000;
-const wss = new WebSocketServer({ port: PORT });
-
-wss.on("connection", (ws) => {
-  console.log("Client connected");
-
-  ws.on("message", (msg) => {
-    console.log("Received:", msg.toString());
-    ws.send(`Echo: ${msg.toString()}`);
-  });
-
-  ws.on("close", () => {
-    console.log("Client disconnected");
-  });
+const httpServer = createServer();
+const io = new Server(httpServer, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
 });
 
-console.log(`WebSocket server running on ws://localhost:${PORT}`);
+initializeRegions();
+io.on("connection", handleConnection());
+startPeriodicFetching(io);
+
+httpServer.listen(PORT, () => {
+  console.log(`Socket.io server running on http://localhost:${PORT}`);
+});
