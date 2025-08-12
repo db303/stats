@@ -1,0 +1,10 @@
+{
+  "name": "stats-monorepo",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend",
+    "shared"
+  ],
+  "packageManager": "pnpm@10.13.1"
+}

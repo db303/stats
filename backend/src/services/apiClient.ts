@@ -1,4 +1,3 @@
-import fetch from "node-fetch";
 import { ZodError } from "zod";
 import { REGIONS, Region } from "../config/endpoints";
 import { ApiResponse, ApiResponseSchema } from "../../../shared/types";
